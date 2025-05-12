@@ -3,10 +3,10 @@ package v1
 import (
 	"net/http"
 
+	_ "github.com/alexKudryavtsev-web/beyond-limits-app/docs"
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
-	// _ "github.com/alexKudryavtsev-web/beyond-limits-app/docs"
 )
 
 func newCommonRoutes(handler *gin.RouterGroup) {

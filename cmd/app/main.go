@@ -1,6 +1,6 @@
-// @title           alexKudryavtsev-web/default-service
+// @title           alexKudryavtsev-web/beyond-limits-app
 // @version         1.0
-// @description     default-service
+// @description     beyond-limits-app
 
 // @BasePath  /api
 // @schemes https http
