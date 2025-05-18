@@ -9,6 +9,10 @@ import (
 	"github.com/alexKudryavtsev-web/beyond-limits-app/pkg/postgres"
 )
 
+var (
+	_defaultListCap = 64
+)
+
 type ReferencesRepo struct {
 	*postgres.Postgres
 }
@@ -17,7 +21,6 @@ func NewReferencesRepo(pg *postgres.Postgres) *ReferencesRepo {
 	return &ReferencesRepo{pg}
 }
 
-// Genres
 func (r *ReferencesRepo) GetGenres(ctx context.Context) ([]entity.Genre, error) {
 	query, _, err := r.Builder.Select("id", "name").From("genres").ToSql()
 	if err != nil {
@@ -75,9 +78,6 @@ func (r *ReferencesRepo) DeleteGenre(ctx context.Context, id uint64) error {
 	return nil
 }
 
-// internal/repo/references_postgres.go
-
-// Authors
 func (r *ReferencesRepo) GetAuthors(ctx context.Context) ([]entity.Author, error) {
 	query, _, err := r.Builder.Select("id", "full_name").From("authors").ToSql()
 	if err != nil {
@@ -135,7 +135,6 @@ func (r *ReferencesRepo) DeleteAuthor(ctx context.Context, id uint64) error {
 	return nil
 }
 
-// Dimensions
 func (r *ReferencesRepo) GetDimensions(ctx context.Context) ([]entity.Dimension, error) {
 	query, _, err := r.Builder.Select("id", "width", "height").From("dimensions").ToSql()
 	if err != nil {
@@ -193,7 +192,6 @@ func (r *ReferencesRepo) DeleteDimension(ctx context.Context, id uint64) error {
 	return nil
 }
 
-// WorkTechniques
 func (r *ReferencesRepo) GetWorkTechniques(ctx context.Context) ([]entity.WorkTechnique, error) {
 	query, _, err := r.Builder.Select("id", "name").From("work_techniques").ToSql()
 	if err != nil {

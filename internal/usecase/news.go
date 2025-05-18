@@ -1,4 +1,3 @@
-// internal/usecase/news.go
 package usecase
 
 import (

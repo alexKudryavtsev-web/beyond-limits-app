@@ -1,4 +1,3 @@
-// internal/controller/http/middleware/auth.go
 package middleware
 
 import (

@@ -30,9 +30,6 @@ func Run(cfg *config.Config) {
 	}
 	defer pg.Close()
 
-	todosRepo := repo.New(pg)
-	todosUseCase := usecase.NewTodosUseCase(todosRepo)
-
 	adminUseCase := usecase.NewAuthUseCase(cfg.Admin)
 
 	referencesRepo := repo.NewReferencesRepo(pg)
@@ -45,7 +42,7 @@ func Run(cfg *config.Config) {
 	newsUseCase := usecase.NewNewsUseCase(newsRepo)
 
 	handler := gin.New()
-	v1.NewRouter(handler, logger, cfg.Admin, todosUseCase, adminUseCase, referencesUseCase, picturesUseCase, newsUseCase)
+	v1.NewRouter(handler, logger, cfg.Admin, adminUseCase, referencesUseCase, picturesUseCase, newsUseCase)
 
 	httpServer := httpserver.New(handler, httpserver.Port(cfg.HTTP.Port))
 
