@@ -1,5 +1,20 @@
 basePath: /api
 definitions:
+  entity.AuthResponse:
+    properties:
+      token:
+        type: string
+    type: object
+  v1.doLoginRequest:
+    properties:
+      login:
+        type: string
+      password:
+        type: string
+    required:
+    - login
+    - password
+    type: object
   v1.doSaveTodoRequest:
     properties:
       task:
@@ -7,12 +22,53 @@ definitions:
     required:
     - task
     type: object
+  v1.response:
+    properties:
+      error:
+        example: message
+        type: string
+    type: object
 info:
   contact: {}
   description: beyond-limits-app
   title: alexKudryavtsev-web/beyond-limits-app
   version: "1.0"
 paths:
+  /admin/login:
+    post:
+      consumes:
+      - application/json
+      description: Login admin
+      operationId: admin-login
+      parameters:
+      - description: Login and password
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/v1.doLoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.AuthResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/v1.response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/v1.response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/v1.response'
+      summary: Admin login
+      tags:
+      - auth
   /healthz:
     get:
       operationId: healthz

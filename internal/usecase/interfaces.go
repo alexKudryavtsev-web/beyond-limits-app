@@ -3,6 +3,7 @@ package usecase
 import (
 	"context"
 
+	"github.com/alexKudryavtsev-web/beyond-limits-app/config"
 	"github.com/alexKudryavtsev-web/beyond-limits-app/internal/entity"
 )
 
@@ -17,5 +18,13 @@ type (
 		GetAllTodos(ctx context.Context) ([]entity.Todo, error)
 		GetTodoByID(ctx context.Context, id uint64) (*entity.Todo, error)
 		SaveTodo(ctx context.Context, task string) error
+	}
+
+	Auth interface {
+		Login(ctx context.Context, login, password string) (string, error)
+	}
+
+	AuthUseCase struct {
+		adminCfg config.Admin
 	}
 )

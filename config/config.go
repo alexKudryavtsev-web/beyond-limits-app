@@ -9,9 +9,10 @@ import (
 
 type (
 	Config struct {
-		HTTP HTTP `yaml:"http"`
-		Log  Log  `yaml:"logger"`
-		PG   PG   `yaml:"postgres"`
+		HTTP  HTTP  `yaml:"http"`
+		Log   Log   `yaml:"logger"`
+		PG    PG    `yaml:"postgres"`
+		Admin Admin `yaml:"admin"`
 	}
 
 	HTTP struct {
@@ -20,12 +21,18 @@ type (
 
 	Log struct {
 		Level       string `yaml:"level"`
-		Destination string `yaml:"destination" env:"LOG_DESTINATION"`		
+		Destination string `yaml:"destination" env:"LOG_DESTINATION"`
 	}
 
 	PG struct {
 		PoolMax int    `yaml:"pool_max" env:"PG_POOL_MAX"`
 		URL     string `yaml:"pg_url" env:"PG_URL"`
+	}
+
+	Admin struct {
+		Login     string `env-required:"true" env:"ADMIN_LOGIN"`
+		Password  string `env-required:"true" env:"ADMIN_PASSWORD"`
+		JWTSecret string `env-required:"true" env:"JWT_SECRET"`
 	}
 )
 

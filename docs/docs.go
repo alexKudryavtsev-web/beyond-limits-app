@@ -15,6 +15,59 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/admin/login": {
+            "post": {
+                "description": "Login admin",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Admin login",
+                "operationId": "admin-login",
+                "parameters": [
+                    {
+                        "description": "Login and password",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/v1.doLoginRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/entity.AuthResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/v1.response"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/v1.response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/v1.response"
+                        }
+                    }
+                }
+            }
+        },
         "/healthz": {
             "get": {
                 "tags": [
@@ -137,6 +190,29 @@ const docTemplate = `{
         }
     },
     "definitions": {
+        "entity.AuthResponse": {
+            "type": "object",
+            "properties": {
+                "token": {
+                    "type": "string"
+                }
+            }
+        },
+        "v1.doLoginRequest": {
+            "type": "object",
+            "required": [
+                "login",
+                "password"
+            ],
+            "properties": {
+                "login": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
         "v1.doSaveTodoRequest": {
             "type": "object",
             "required": [
@@ -145,6 +221,15 @@ const docTemplate = `{
             "properties": {
                 "task": {
                     "type": "string"
+                }
+            }
+        },
+        "v1.response": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string",
+                    "example": "message"
                 }
             }
         }
