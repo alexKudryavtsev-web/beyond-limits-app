@@ -8,9 +8,15 @@ import (
 	"github.com/golang-jwt/jwt"
 )
 
+type AuthUseCase struct {
+	adminCfg config.Admin
+}
+
 func NewAuthUseCase(adminCfg config.Admin) *AuthUseCase {
 	return &AuthUseCase{adminCfg: adminCfg}
 }
+
+var _ Auth = (*AuthUseCase)(nil)
 
 func (a *AuthUseCase) Login(ctx context.Context, login, password string) (string, error) {
 	if login != a.adminCfg.Login || password != a.adminCfg.Password {

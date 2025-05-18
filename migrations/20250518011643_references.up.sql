@@ -1,0 +1,51 @@
+CREATE TABLE IF NOT EXISTS genres (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL UNIQUE,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS authors (
+    id SERIAL PRIMARY KEY,
+    full_name VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS dimensions (
+    id SERIAL PRIMARY KEY,
+    width INTEGER NOT NULL,
+    height INTEGER NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS work_techniques (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL UNIQUE,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS pictures (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    price INTEGER NOT NULL,
+    author_id INTEGER REFERENCES authors(id),
+    dimensions_id INTEGER REFERENCES dimensions(id),
+    work_technique_id INTEGER REFERENCES work_techniques(id),
+    genre_id INTEGER REFERENCES genres(id),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS pictures_photos (
+    id SERIAL PRIMARY KEY,
+    picture_id INTEGER REFERENCES pictures(id),
+    url VARCHAR(255) NOT NULL,
+    mime VARCHAR(100) NOT NULL,
+    is_main BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS news (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    content TEXT NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);

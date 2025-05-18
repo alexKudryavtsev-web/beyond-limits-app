@@ -1,0 +1,7 @@
+DROP TABLE IF EXISTS genres;
+DROP TABLE IF EXISTS authors;
+DROP TABLE IF EXISTS dimensions;
+DROP TABLE IF EXISTS work_techniques;
+DROP TABLE IF EXISTS pictures;
+DROP TABLE IF EXISTS pictures_photos;
+DROP TABLE IF EXISTS news;

@@ -35,8 +35,11 @@ func Run(cfg *config.Config) {
 
 	adminUseCase := usecase.NewAuthUseCase(cfg.Admin)
 
+	referencesRepo := repo.NewReferencesRepo(pg)
+	referencesUseCase := usecase.NewReferencesUseCase(referencesRepo)
+
 	handler := gin.New()
-	v1.NewRouter(handler, logger, todosUseCase, adminUseCase)
+	v1.NewRouter(handler, logger, cfg.Admin, todosUseCase, adminUseCase, referencesUseCase)
 
 	httpServer := httpserver.New(handler, httpserver.Port(cfg.HTTP.Port))
 

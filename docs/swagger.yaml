@@ -5,6 +5,67 @@ definitions:
       token:
         type: string
     type: object
+  entity.Author:
+    properties:
+      full_name:
+        type: string
+      id:
+        type: integer
+    type: object
+  entity.Dimension:
+    properties:
+      height:
+        type: integer
+      id:
+        type: integer
+      width:
+        type: integer
+    type: object
+  entity.Genre:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+    type: object
+  entity.WorkTechnique:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+    type: object
+  v1.doCreateAuthorRequest:
+    properties:
+      full_name:
+        type: string
+    required:
+    - full_name
+    type: object
+  v1.doCreateDimensionRequest:
+    properties:
+      height:
+        type: integer
+      width:
+        type: integer
+    required:
+    - height
+    - width
+    type: object
+  v1.doCreateGenreRequest:
+    properties:
+      name:
+        type: string
+    required:
+    - name
+    type: object
+  v1.doCreateWorkTechniqueRequest:
+    properties:
+      name:
+        type: string
+    required:
+    - name
+    type: object
   v1.doLoginRequest:
     properties:
       login:
@@ -34,6 +95,213 @@ info:
   title: alexKudryavtsev-web/beyond-limits-app
   version: "1.0"
 paths:
+  /admin/authors:
+    post:
+      consumes:
+      - application/json
+      description: Create new author
+      operationId: create-author
+      parameters:
+      - description: Author full name
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/v1.doCreateAuthorRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/v1.response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/v1.response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/v1.response'
+      security:
+      - BearerAuth: []
+      summary: Create author
+      tags:
+      - admin
+  /admin/authors/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete author by ID
+      operationId: delete-author
+      parameters:
+      - description: Author ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/v1.response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/v1.response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/v1.response'
+      security:
+      - BearerAuth: []
+      summary: Delete author
+      tags:
+      - admin
+  /admin/dimensions:
+    post:
+      consumes:
+      - application/json
+      description: Create new dimension
+      operationId: create-dimension
+      parameters:
+      - description: Dimension width and height
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/v1.doCreateDimensionRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/v1.response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/v1.response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/v1.response'
+      security:
+      - BearerAuth: []
+      summary: Create dimension
+      tags:
+      - admin
+  /admin/dimensions/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete dimension by ID
+      operationId: delete-dimension
+      parameters:
+      - description: Dimension ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/v1.response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/v1.response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/v1.response'
+      security:
+      - BearerAuth: []
+      summary: Delete dimension
+      tags:
+      - admin
+  /admin/genres:
+    post:
+      consumes:
+      - application/json
+      description: Create new genre
+      operationId: create-genre
+      parameters:
+      - description: Genre name
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/v1.doCreateGenreRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/v1.response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/v1.response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/v1.response'
+      security:
+      - BearerAuth: []
+      summary: Create genre
+      tags:
+      - admin
+  /admin/genres/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete genre by ID
+      operationId: delete-genre
+      parameters:
+      - description: Genre ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/v1.response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/v1.response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/v1.response'
+      security:
+      - BearerAuth: []
+      summary: Delete genre
+      tags:
+      - admin
   /admin/login:
     post:
       consumes:
@@ -69,6 +337,141 @@ paths:
       summary: Admin login
       tags:
       - auth
+  /admin/work-techniques:
+    post:
+      consumes:
+      - application/json
+      description: Create new work technique
+      operationId: create-work-technique
+      parameters:
+      - description: Work technique name
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/v1.doCreateWorkTechniqueRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/v1.response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/v1.response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/v1.response'
+      security:
+      - BearerAuth: []
+      summary: Create work technique
+      tags:
+      - admin
+  /admin/work-techniques/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete work technique by ID
+      operationId: delete-work-technique
+      parameters:
+      - description: Work technique ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/v1.response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/v1.response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/v1.response'
+      security:
+      - BearerAuth: []
+      summary: Delete work technique
+      tags:
+      - admin
+  /authors:
+    get:
+      consumes:
+      - application/json
+      description: Get all authors
+      operationId: get-authors
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.Author'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/v1.response'
+      summary: Get authors
+      tags:
+      - references
+  /dimensions:
+    get:
+      consumes:
+      - application/json
+      description: Get all dimensions
+      operationId: get-dimensions
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.Dimension'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/v1.response'
+      summary: Get dimensions
+      tags:
+      - references
+  /genres:
+    get:
+      consumes:
+      - application/json
+      description: Get all genres
+      operationId: get-genres
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.Genre'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/v1.response'
+      summary: Get genres
+      tags:
+      - references
   /healthz:
     get:
       operationId: healthz
@@ -147,6 +550,28 @@ paths:
       summary: Get todo by id
       tags:
       - todos
+  /work-techniques:
+    get:
+      consumes:
+      - application/json
+      description: Get all work techniques
+      operationId: get-work-techniques
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.WorkTechnique'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/v1.response'
+      summary: Get work techniques
+      tags:
+      - references
 schemes:
 - https
 - http
