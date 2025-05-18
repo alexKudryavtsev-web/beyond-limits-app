@@ -4,10 +4,8 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/alexKudryavtsev-web/beyond-limits-app/config"
 	"github.com/alexKudryavtsev-web/beyond-limits-app/internal/usecase"
 	"github.com/alexKudryavtsev-web/beyond-limits-app/pkg/logger"
-	"github.com/alexKudryavtsev-web/beyond-limits-app/pkg/middleware"
 	"github.com/gin-gonic/gin"
 )
 
@@ -16,17 +14,15 @@ type referencesRoutes struct {
 	l logger.Interface
 }
 
-func newReferencesRoutes(handler *gin.RouterGroup, l logger.Interface, r usecase.References, adminCfg config.Admin) {
+func newReferencesRoutes(handler *gin.RouterGroup, l logger.Interface, r usecase.References, authMiddleware gin.HandlerFunc) {
 	routes := referencesRoutes{r, l}
 
-	// Public routes
 	handler.GET("/genres", routes.doGetGenres)
 	handler.GET("/authors", routes.doGetAuthors)
 	handler.GET("/dimensions", routes.doGetDimensions)
 	handler.GET("/work-techniques", routes.doGetWorkTechniques)
 
-	// Admin routes
-	adminHandler := handler.Group("/admin", middleware.AuthMiddleware(l, adminCfg.JWTSecret))
+	adminHandler := handler.Group("/admin", authMiddleware)
 	{
 		adminHandler.POST("/genres", routes.doCreateGenre)
 		adminHandler.DELETE("/genres/:id", routes.doDeleteGenre)

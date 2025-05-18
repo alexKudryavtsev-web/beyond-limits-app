@@ -28,6 +28,89 @@ definitions:
       name:
         type: string
     type: object
+  entity.Photo:
+    properties:
+      id:
+        type: integer
+      mime:
+        type: string
+      url:
+        type: string
+    type: object
+  entity.PhotoDeleteResponse:
+    properties:
+      success:
+        type: boolean
+    type: object
+  entity.PhotoUploadResponse:
+    properties:
+      id:
+        type: integer
+      url:
+        type: string
+    type: object
+  entity.Picture:
+    properties:
+      author:
+        $ref: '#/definitions/entity.Author'
+      created_at:
+        type: string
+      dimensions:
+        $ref: '#/definitions/entity.Dimension'
+      gallery:
+        items:
+          $ref: '#/definitions/entity.Photo'
+        type: array
+      genre:
+        $ref: '#/definitions/entity.Genre'
+      id:
+        type: integer
+      photo:
+        $ref: '#/definitions/entity.Photo'
+      price:
+        type: integer
+      title:
+        type: string
+      work_technique:
+        $ref: '#/definitions/entity.WorkTechnique'
+    type: object
+  entity.PictureCreateRequest:
+    properties:
+      author_id:
+        type: integer
+      dimensions_id:
+        type: integer
+      genre_id:
+        type: integer
+      price:
+        type: integer
+      title:
+        type: string
+      work_technique_id:
+        type: integer
+    required:
+    - author_id
+    - dimensions_id
+    - genre_id
+    - price
+    - title
+    - work_technique_id
+    type: object
+  entity.PictureUpdateRequest:
+    properties:
+      author_id:
+        type: integer
+      dimensions_id:
+        type: integer
+      genre_id:
+        type: integer
+      price:
+        type: integer
+      title:
+        type: string
+      work_technique_id:
+        type: integer
+    type: object
   entity.WorkTechnique:
     properties:
       id:
@@ -337,6 +420,237 @@ paths:
       summary: Admin login
       tags:
       - auth
+  /admin/pictures:
+    post:
+      consumes:
+      - application/json
+      description: Create new picture (without photos)
+      operationId: create-picture
+      parameters:
+      - description: Picture data
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/entity.PictureCreateRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/v1.response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/v1.response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/v1.response'
+      security:
+      - BearerAuth: []
+      summary: Create picture
+      tags:
+      - admin
+  /admin/pictures/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete picture by ID
+      operationId: delete-picture
+      parameters:
+      - description: Picture ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/v1.response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/v1.response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/v1.response'
+      security:
+      - BearerAuth: []
+      summary: Delete picture
+      tags:
+      - admin
+    patch:
+      consumes:
+      - application/json
+      description: Update picture data
+      operationId: update-picture
+      parameters:
+      - description: Picture ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Picture data
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/entity.PictureUpdateRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/v1.response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/v1.response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/v1.response'
+      security:
+      - BearerAuth: []
+      summary: Update picture
+      tags:
+      - admin
+  /admin/pictures/{id}/gallery:
+    post:
+      consumes:
+      - multipart/form-data
+      description: Upload photo to picture gallery
+      operationId: upload-gallery-photo
+      parameters:
+      - description: Picture ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Image file
+        in: formData
+        name: file
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.PhotoUploadResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/v1.response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/v1.response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/v1.response'
+      security:
+      - BearerAuth: []
+      summary: Upload gallery photo
+      tags:
+      - admin
+  /admin/pictures/{id}/gallery/{photo_id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete photo from picture gallery
+      operationId: delete-gallery-photo
+      parameters:
+      - description: Picture ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Photo ID
+        in: path
+        name: photo_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.PhotoDeleteResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/v1.response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/v1.response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/v1.response'
+      security:
+      - BearerAuth: []
+      summary: Delete gallery photo
+      tags:
+      - admin
+  /admin/pictures/{id}/photo:
+    post:
+      consumes:
+      - multipart/form-data
+      description: Upload main photo for picture
+      operationId: upload-main-photo
+      parameters:
+      - description: Picture ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Image file
+        in: formData
+        name: file
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.PhotoUploadResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/v1.response'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/v1.response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/v1.response'
+      security:
+      - BearerAuth: []
+      summary: Upload main photo
+      tags:
+      - admin
   /admin/work-techniques:
     post:
       consumes:
@@ -483,6 +797,62 @@ paths:
       summary: Check server healthz
       tags:
       - common
+  /pictures:
+    get:
+      consumes:
+      - application/json
+      description: Get all pictures
+      operationId: get-pictures
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entity.Picture'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/v1.response'
+      summary: Get pictures
+      tags:
+      - pictures
+  /pictures/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Get picture by ID
+      operationId: get-picture-by-id
+      parameters:
+      - description: Picture ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entity.Picture'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/v1.response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/v1.response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/v1.response'
+      summary: Get picture by ID
+      tags:
+      - pictures
   /todos:
     post:
       consumes:

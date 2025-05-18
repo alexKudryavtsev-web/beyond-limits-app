@@ -1,6 +1,9 @@
 package entity
 
-import "time"
+import (
+	"errors"
+	"time"
+)
 
 type Picture struct {
 	ID            uint64        `json:"id"`
@@ -38,3 +41,22 @@ type PictureUpdateRequest struct {
 	WorkTechniqueID *uint64 `json:"work_technique_id"`
 	GenreID         *uint64 `json:"genre_id"`
 }
+
+type PhotoUploadRequest struct {
+	PictureID uint64 `form:"picture_id" binding:"required"`
+	IsMain    bool   `form:"is_main"`
+}
+
+type PhotoUploadResponse struct {
+	ID  uint64 `json:"id"`
+	URL string `json:"url"`
+}
+
+type PhotoDeleteResponse struct {
+	Success bool `json:"success"`
+}
+
+var (
+	ErrPictureNotFound = errors.New("picture not found")
+	ErrPhotoNotFound   = errors.New("photo not found")
+)

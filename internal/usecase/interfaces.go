@@ -2,6 +2,7 @@ package usecase
 
 import (
 	"context"
+	"mime/multipart"
 
 	"github.com/alexKudryavtsev-web/beyond-limits-app/internal/entity"
 )
@@ -70,5 +71,26 @@ type (
 		GetWorkTechniques(ctx context.Context) ([]entity.WorkTechnique, error)
 		CreateWorkTechnique(ctx context.Context, name string) error
 		DeleteWorkTechnique(ctx context.Context, id uint64) error
+	}
+
+	Pictures interface {
+		GetPictures(ctx context.Context) ([]entity.Picture, error)
+		GetPictureByID(ctx context.Context, id uint64) (*entity.Picture, error)
+		CreatePicture(ctx context.Context, req entity.PictureCreateRequest) error
+		UpdatePicture(ctx context.Context, id uint64, req entity.PictureUpdateRequest) error
+		DeletePicture(ctx context.Context, id uint64) error
+		UploadPhoto(ctx context.Context, fileHeader *multipart.FileHeader, req entity.PhotoUploadRequest) (*entity.PhotoUploadResponse, error)
+		DeletePhoto(ctx context.Context, pictureID, photoID uint64) (*entity.PhotoDeleteResponse, error)
+	}
+
+	PicturesRepo interface {
+		GetPictures(ctx context.Context) ([]entity.Picture, error)
+		GetPictureByID(ctx context.Context, id uint64) (*entity.Picture, error)
+		CreatePicture(ctx context.Context, req entity.PictureCreateRequest) error
+		UpdatePicture(ctx context.Context, id uint64, req entity.PictureUpdateRequest) error
+		DeletePicture(ctx context.Context, id uint64) error
+		SavePhoto(ctx context.Context, pictureID uint64, url, mime string, isMain bool) (uint64, error)
+		DeletePhoto(ctx context.Context, photoID uint64) error
+		GetPhoto(ctx context.Context, photoID uint64) (*entity.Photo, error)
 	}
 )
