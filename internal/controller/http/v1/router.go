@@ -8,7 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func NewRouter(handler *gin.Engine, logger logger.Interface, cfg config.Admin, todoUseCase usecase.Todos, authUseCase usecase.Auth, referencesUseCase usecase.References, picturesUseCase usecase.Pictures) {
+func NewRouter(handler *gin.Engine, logger logger.Interface, cfg config.Admin, todoUseCase usecase.Todos, authUseCase usecase.Auth, referencesUseCase usecase.References, picturesUseCase usecase.Pictures, newsUseCase usecase.News) {
 	handler.Use(gin.Logger())
 	handler.Use(gin.Recovery())
 
@@ -23,4 +23,5 @@ func NewRouter(handler *gin.Engine, logger logger.Interface, cfg config.Admin, t
 	newAuthRoutes(router, logger, authUseCase)
 	newReferencesRoutes(router, logger, referencesUseCase, authMiddleare)
 	newPicturesRoutes(router, logger, picturesUseCase, authMiddleare)
+	newNewsRoutes(router, logger, newsUseCase, authMiddleare)
 }

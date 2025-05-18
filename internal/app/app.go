@@ -41,8 +41,11 @@ func Run(cfg *config.Config) {
 	picturesRepo := repo.NewPicturesRepo(pg)
 	picturesUseCase := usecase.NewPicturesUseCase(picturesRepo)
 
+	newsRepo := repo.NewNewsRepo(pg)
+	newsUseCase := usecase.NewNewsUseCase(newsRepo)
+
 	handler := gin.New()
-	v1.NewRouter(handler, logger, cfg.Admin, todosUseCase, adminUseCase, referencesUseCase, picturesUseCase)
+	v1.NewRouter(handler, logger, cfg.Admin, todosUseCase, adminUseCase, referencesUseCase, picturesUseCase, newsUseCase)
 
 	httpServer := httpserver.New(handler, httpserver.Port(cfg.HTTP.Port))
 

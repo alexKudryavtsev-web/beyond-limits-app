@@ -93,4 +93,20 @@ type (
 		DeletePhoto(ctx context.Context, photoID uint64) error
 		GetPhoto(ctx context.Context, photoID uint64) (*entity.Photo, error)
 	}
+
+	News interface {
+		GetNews(ctx context.Context) ([]entity.News, error)
+		GetNewsByID(ctx context.Context, id uint64) (*entity.News, error)
+		CreateNews(ctx context.Context, req entity.NewsCreateRequest) error
+		UpdateNews(ctx context.Context, id uint64, req entity.NewsUpdateRequest) error
+		DeleteNews(ctx context.Context, id uint64) error
+	}
+
+	NewsRepo interface {
+		GetNews(ctx context.Context) ([]entity.News, error)
+		GetNewsByID(ctx context.Context, id uint64) (*entity.News, error)
+		CreateNews(ctx context.Context, req entity.NewsCreateRequest) error
+		UpdateNews(ctx context.Context, id uint64, req entity.NewsUpdateRequest) error
+		DeleteNews(ctx context.Context, id uint64) error
+	}
 )
