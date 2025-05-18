@@ -8,20 +8,39 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func NewRouter(handler *gin.Engine, logger logger.Interface, cfg config.Admin, todoUseCase usecase.Todos, authUseCase usecase.Auth, referencesUseCase usecase.References, picturesUseCase usecase.Pictures, newsUseCase usecase.News) {
+func NewRouter(
+	handler *gin.Engine,
+	logger logger.Interface,
+	cfg config.Admin,
+	todoUseCase usecase.Todos,
+	authUseCase usecase.Auth,
+	referencesUseCase usecase.References,
+	picturesUseCase usecase.Pictures,
+	newsUseCase usecase.News,
+) {
+	// Мидлвары
 	handler.Use(gin.Logger())
 	handler.Use(gin.Recovery())
 
-	handler.Static("/uploads", "./uploads")
+	// API Routes
+	apiRouter := handler.Group("/api")
+	{
+		newCommonRoutes(apiRouter)
+		newTodosRoutes(apiRouter, logger, todoUseCase)
+		newAuthRoutes(apiRouter, logger, authUseCase)
 
-	router := handler.Group("/api")
+		authMiddleware := middleware.AuthMiddleware(logger, cfg.JWTSecret)
 
-	authMiddleare := middleware.AuthMiddleware(logger, cfg.JWTSecret)
+		newReferencesRoutes(apiRouter, logger, referencesUseCase, authMiddleware)
+		newPicturesRoutes(apiRouter, logger, picturesUseCase, authMiddleware)
+		newNewsRoutes(apiRouter, logger, newsUseCase, authMiddleware)
+	}
 
-	newCommonRoutes(router)
-	newTodosRoutes(router, logger, todoUseCase)
-	newAuthRoutes(router, logger, authUseCase)
-	newReferencesRoutes(router, logger, referencesUseCase, authMiddleare)
-	newPicturesRoutes(router, logger, picturesUseCase, authMiddleare)
-	newNewsRoutes(router, logger, newsUseCase, authMiddleare)
+	// Frontend Routes
+	NewFrontendRouter(
+		handler,
+		logger,
+		picturesUseCase,
+		referencesUseCase,
+	)
 }

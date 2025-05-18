@@ -1,0 +1,28 @@
+{{define "content"}}
+<div class="picture-detail">
+    <div class="gallery">
+        <div class="main-image">
+            <img src="{{.Picture.Photo.URL}}" alt="{{.Picture.Title}}">
+        </div>
+        <div class="thumbnails">
+            {{range .Picture.Gallery}}
+                <img src="{{.URL}}" alt="Галерея">
+            {{end}}
+        </div>
+    </div>
+    
+    <div class="info">
+        <h1>{{.Picture.Title}}</h1>
+        <p class="price">{{.Picture.Price}} ₽</p>
+        
+        <div class="details">
+            <p><strong>Автор:</strong> {{.Picture.Author.FullName}}</p>
+            <p><strong>Размер холста:</strong> {{.Picture.Dimensions.Width}}x{{.Picture.Dimensions.Height}} см</p>
+            <p><strong>Техника работы:</strong> {{.Picture.WorkTechnique.Name}}</p>
+            <p><strong>Жанр:</strong> {{.Picture.Genre.Name}}</p>
+        </div>
+        
+        <button class="add-to-cart">В корзину</button>
+    </div>
+</div>
+{{end}}

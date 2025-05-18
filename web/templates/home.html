@@ -1,0 +1,32 @@
+{{define "content"}}
+<div class="catalog">
+    <h1>КАТАЛОГ КАРТИН</h1>
+    
+    <div class="filters">
+        <select id="genre-filter">
+            <option value="">Все жанры</option>
+            {{range .Genres}}
+                <option value="{{.ID}}">{{.Name}}</option>
+            {{end}}
+        </select>
+        
+        <!-- Другие фильтры -->
+    </div>
+    
+    <div class="pictures-grid">
+        {{range .Pictures}}
+        <div class="picture-card">
+            <a href="/pictures/{{.ID}}">
+                <img src="{{.Photo.URL}}" alt="{{.Title}}">
+                <h3>{{.Title}}</h3>
+                <p class="price">{{.Price}} ₽</p>
+            </a>
+        </div>
+        {{end}}
+    </div>
+    
+    <div class="pagination">
+        <!-- Пагинация -->
+    </div>
+</div>
+{{end}}

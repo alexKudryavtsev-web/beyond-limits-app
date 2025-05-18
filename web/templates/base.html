@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beyond Limits - {{.Title}}</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <script src="/static/js/htmx.js"></script>
+    <style>
+        :root {
+            --primary: #612B2B;
+            --secondary: #5F5C5C;
+            --light: #C3C3C3;
+            --bg: #D9D9D9;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Beyond Limits</h1>
+        <p>Искусство за гранью</p>
+    </header>
+    
+    <main>
+        {{template "content" .}}
+    </main>
+    
+    <footer>
+        <div class="social-links">
+            <!-- Ссылки на соцсети -->
+        </div>
+        <div class="support">
+            <p>Поддержка</p>
+            <p>89-00-546-65-23</p>
+            <p>Beyond.limits@mail.ru</p>
+        </div>
+    </footer>
+</body>
+</html>
