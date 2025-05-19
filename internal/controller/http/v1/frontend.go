@@ -34,6 +34,7 @@ func NewFrontendRouter(
 	handler.Static("/uploads", "./uploads")
 
 	handler.GET("/", r.homePage)
+	handler.GET("/pictures", r.galleryPage)
 	handler.GET("/pictures/:id", r.picturePage)
 }
 
@@ -44,6 +45,10 @@ func (r *frontendRoutes) createRenderer() multitemplate.Renderer {
 		"web/templates/base.html",
 		"web/templates/home.html")
 
+	renderer.AddFromFiles("gallery",
+		"web/templates/base.html",
+		"web/templates/gallery.html")
+
 	renderer.AddFromFiles("picture",
 		"web/templates/base.html",
 		"web/templates/picture.html")
@@ -52,20 +57,20 @@ func (r *frontendRoutes) createRenderer() multitemplate.Renderer {
 }
 
 func (r *frontendRoutes) homePage(c *gin.Context) {
+	c.HTML(200, "home", gin.H{
+		"Title": "О нас",
+	})
+}
+
+func (r *frontendRoutes) galleryPage(c *gin.Context) {
 	pictures, err := r.picturesUC.GetPictures(c.Request.Context())
 	if err != nil {
 		r.l.Error(err, "http - v1 - homePage - get pictures")
 	}
 
-	genres, err := r.refUC.GetGenres(c.Request.Context())
-	if err != nil {
-		r.l.Error(err, "http - v1 - homePage - get genres")
-	}
-
-	c.HTML(200, "home", gin.H{
-		"Title":    "Каталог картин",
+	c.HTML(200, "gallery", gin.H{
+		"Title":    "Галерея",
 		"Pictures": pictures,
-		"Genres":   genres,
 	})
 }
 

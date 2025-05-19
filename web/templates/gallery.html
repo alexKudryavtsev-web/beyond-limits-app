@@ -1,0 +1,20 @@
+{{define "content"}}
+<div class="gallery-page">
+    <h1 class="app-title">Beyond Limits — Галерея</h1>
+
+    <div class="gallery-grid">
+        {{range .Pictures}}
+        <div class="picture-card">
+            <img src="{{.Photo.URL}}" alt="{{.Title}}">
+            <a href="/pictures/{{.ID}}" class="no-style">
+                <div class="picture-detail">
+                    <h3 class="app-text">{{.Title}}</h3>
+                    <p class="price">{{.Price}} ₽</p>
+                    <button class="app-button-link_mini">Подробнее</button>
+            </a>
+        </div>
+    </div>
+    {{end}}
+</div>
+</div>
+{{end}}

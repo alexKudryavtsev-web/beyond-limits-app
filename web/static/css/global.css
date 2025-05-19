@@ -15,6 +15,17 @@ body {
     --brand-color: #4C2222;
 }
 
+a.no-style {
+    color: inherit !important;
+    text-decoration: none !important;
+    display: inline-block !important;
+}
+
+a.no-style:hover {
+    color: inherit !important;
+    text-decoration: none !important;
+}
+
 .app-title {
     font-family: var(--title-font);
     font-size: 28px;
@@ -29,8 +40,8 @@ body {
     line-height: 24px;
     font-style: normal;
     text-align: left;
-    color: #000!important;
-    text-decoration: none!important;
+    color: #000 !important;
+    text-decoration: none !important;
 }
 
 .app-button-link {
@@ -49,6 +60,30 @@ body {
 }
 
 .app-button-link:hover {
+    background-color: #333;
+}
+
+.app-button-link:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.5);
+}
+
+.app-button-link_mini {
+    display: inline-block;
+    padding: 10px 40px;
+    border-radius: 20px;
+    background-color: var(--brand-color);
+    color: #fff;
+    text-decoration: none;
+    font-family: var(--font-font);
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background-color 0.3s ease;
+}
+
+.app-button-link_mini:hover {
     background-color: #333;
 }
 
