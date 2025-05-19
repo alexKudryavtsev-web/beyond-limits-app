@@ -1,28 +1,22 @@
 {{define "content"}}
-<div class="picture-detail">
-    <div class="gallery">
-        <div class="main-image">
-            <img src="{{.Picture.Photo.URL}}" alt="{{.Picture.Title}}">
+<div class="picture-page">
+    <div class="picture-page-card">
+        <img src="{{.Picture.Photo.URL}}" class="picture-page-photo" alt="{{.Picture.Title}}">
+
+        <div class="picture-page-info">
+            <h1 class="app-title">{{.Picture.Title}}</h1>
+            <p class="app-text picture-page-text"><strong>Автор:</strong> {{.Picture.Author.FullName}}</p>
+            <p class="app-text picture-page-text"><strong>Размер холста:</strong>
+                {{.Picture.Dimensions.Width}}x{{.Picture.Dimensions.Height}}
+                см</p>
+            <p class="app-text picture-page-text"><strong>Техника работы:</strong> {{.Picture.WorkTechnique.Name}}</p>
+            <p class="app-text picture-page-text"><strong>Жанр:</strong> {{.Picture.Genre.Name}}</p>
+
+            <div class="app-text picture-page-description">Возможность оплаты покупки на сайте находится в разработке.
+                Уточняйте
+                актуальную информацию о наличии и стоимости этой работы через <a
+                    href="https://t.me/Ruslan_does_not_have_a_username">менеджера</a></div>
         </div>
-        <div class="thumbnails">
-            {{range .Picture.Gallery}}
-                <img src="{{.URL}}" alt="Галерея">
-            {{end}}
-        </div>
-    </div>
-    
-    <div class="info">
-        <h1>{{.Picture.Title}}</h1>
-        <p class="price">{{.Picture.Price}} ₽</p>
-        
-        <div class="details">
-            <p><strong>Автор:</strong> {{.Picture.Author.FullName}}</p>
-            <p><strong>Размер холста:</strong> {{.Picture.Dimensions.Width}}x{{.Picture.Dimensions.Height}} см</p>
-            <p><strong>Техника работы:</strong> {{.Picture.WorkTechnique.Name}}</p>
-            <p><strong>Жанр:</strong> {{.Picture.Genre.Name}}</p>
-        </div>
-        
-        <button class="add-to-cart">В корзину</button>
     </div>
 </div>
 {{end}}

@@ -249,5 +249,108 @@ section.in-view {
 
 .picture-card:hover {
     transform: scale(1.03) translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+
+/* PICTURE */
+.picture-page {
+    max-width: var(--content-width);
+    margin: 24px auto;
+    margin-bottom: 12px;
+}
+
+.picture-page-card {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+}
+
+.picture-page-photo {
+    max-width: 600px;
+}
+
+.picture-page-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.picture-page-text {
+    font-size: 18px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.picture-page-description {
+    font-size: 12px;
+    font-weight: bold !important;
+    margin-top: 24px;
+    align-self: flex-start;
+    text-align: center;
+}
+
+/* PICTURE ANIMATION */
+.picture-page-card {
+    opacity: 0;
+    animation: fadeIn 1s ease-in forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+.picture-page-photo {
+    transform: scale(0.95);
+    animation: scaleUp 0.8s ease-out forwards;
+    animation-delay: 0.2s;
+}
+
+@keyframes scaleUp {
+    to {
+        transform: scale(1);
+    }
+}
+
+.picture-page-text {
+    opacity: 0;
+    transform: translateY(10px);
+    animation: textAppear 0.5s ease-out forwards;
+}
+
+.picture-page-text:nth-child(1) {
+    animation-delay: 0.4s;
+}
+
+.picture-page-text:nth-child(2) {
+    animation-delay: 0.6s;
+}
+
+.picture-page-text:nth-child(3) {
+    animation-delay: 0.8s;
+}
+
+.picture-page-text:nth-child(4) {
+    animation-delay: 1.0s;
+}
+
+.picture-page-text:nth-child(5) {
+    animation-delay: 1.2s;
+}
+
+.picture-page-description {
+    opacity: 0;
+    transform: translateY(10px);
+    animation: textAppear 0.5s ease-out forwards;
+    animation-delay: 1.4s;
+}
+
+@keyframes textAppear {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
