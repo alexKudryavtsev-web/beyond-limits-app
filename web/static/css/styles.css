@@ -26,6 +26,31 @@
     font-size: 20px;
 }
 
+/* HEADER ANIMATION */
+.menu-item {
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.menu-item:hover {
+    color: var(--brand-color);
+}
+
+.menu-item::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--brand-color);
+    transition: width 0.3s ease;
+}
+
+.menu-item:hover::after {
+    width: 100%;
+}
+
 /* MAIN PAGE */
 .main-page {
     max-width: var(--content-width);
@@ -65,4 +90,71 @@
 .main-info-org-name {
     margin-bottom: 32px;
 }
-/*  */
+
+/* MAIN PAGE ANIMATION */
+.main-info-org-name,
+.main-info-text {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+.main-info-text:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.main-info-text:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+.main-info-button {
+    animation-delay: 0.9s;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.main-info-image {
+    opacity: 0;
+    transform: scale(0.95);
+    animation: fadeInScale 1s ease 0.5s forwards;
+}
+
+@keyframes fadeInScale {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.fa-phone,
+.fa-envelope,
+.fa-map-marker-alt,
+.fa-clock,
+.fa-telegram {
+    transition: transform 0.3s ease;
+}
+
+.fa-phone:hover,
+.fa-envelope:hover,
+.fa-map-marker-alt:hover,
+.fa-clock:hover,
+.fa-telegram:hover {
+    transform: translateY(-5px);
+}
+
+/* TOTAL */
+section {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+section.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
