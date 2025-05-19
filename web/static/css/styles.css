@@ -1,62 +1,68 @@
-body {
-    font-family: 'Arial', sans-serif;
-    color: var(--secondary);
-    background-color: var(--bg);
-    margin: 0;
-    padding: 0;
+/* HEADER */
+.header {
+    display: flex;
+    flex-direction: row;
+    max-width: var(--content-width);
+    gap: 24px;
+    align-items: center;
+    margin: 36px auto;
+    padding: 0 12px;
 }
 
-header {
-    background-color: var(--primary);
-    color: white;
-    padding: 1rem;
-    text-align: center;
+.header-icon {
+    width: 76px;
+    height: 108px;
 }
 
-.pictures-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 1rem;
-    padding: 1rem;
+.menu {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    flex: 1;
+    justify-content: flex-end;
 }
 
-.picture-card {
-    background: white;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+.menu-item {
+    font-size: 20px;
 }
 
-.picture-card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
+/* MAIN PAGE */
+.main-page {
+    max-width: var(--content-width);
+    margin: 24px auto;
+    margin-bottom: 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
-.price {
-    color: var(--primary);
-    font-weight: bold;
+.main-info {
+    display: flex;
+    flex-direction: row;
+    gap: 36px;
 }
 
-/* Стили для страницы картины */
-.picture-detail {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    padding: 2rem;
+.main-info-image {
+    width: auto;
+    height: 560px;
 }
 
-.gallery .main-image img {
-    width: 100%;
-    max-height: 70vh;
-    object-fit: contain;
+.main-info-description {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding-bottom: 20px;
 }
 
-.add-to-cart {
-    background-color: var(--primary);
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    cursor: pointer;
+.main-info-text {
+    text-align: right;
 }
+
+.main-info-button {
+    margin-top: auto
+}
+
+.main-info-org-name {
+    margin-bottom: 32px;
+}
+/*  */

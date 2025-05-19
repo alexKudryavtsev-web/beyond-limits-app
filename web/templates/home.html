@@ -1,32 +1,43 @@
 {{define "content"}}
-<div class="catalog">
-    <h1>КАТАЛОГ КАРТИН</h1>
-    
-    <div class="filters">
-        <select id="genre-filter">
-            <option value="">Все жанры</option>
-            {{range .Genres}}
-                <option value="{{.ID}}">{{.Name}}</option>
-            {{end}}
-        </select>
-        
-        <!-- Другие фильтры -->
-    </div>
-    
-    <div class="pictures-grid">
-        {{range .Pictures}}
-        <div class="picture-card">
-            <a href="/pictures/{{.ID}}">
-                <img src="{{.Photo.URL}}" alt="{{.Title}}">
-                <h3>{{.Title}}</h3>
-                <p class="price">{{.Price}} ₽</p>
-            </a>
+<div class="main-page">
+    <section class="main-info">
+        <div class="main-info-description">
+            <h1 class="app-title main-info-org-name">Beyond Limits — Искусство за гранью</h1>
+            <p class="app-text main-info-text">Студия современного искусства в Санкт-Петербурге, где картины рождаются
+                из смелых идей и
+                глубоких смыслов.</p>
+            <p class="app-text main-info-text">Beyond Limits ломает рамки, вдохновляя и провоцируя. Мы создаем
+                произведения, которые
+                волнуют душу и открывают новые горизонты. Искусство без границ — наша страсть и миссия!</p>
+            <a href="/pictures" class="app-button-link main-info-button">В галерею</a>
         </div>
-        {{end}}
-    </div>
-    
-    <div class="pagination">
-        <!-- Пагинация -->
-    </div>
+        <img class="main-info-image" src="/static/img/pretty-image.avif" alt="beyond limits logo" />
+    </section>
+
+    <section>
+        <h1 class="app-title">
+            Контакты
+        </h1>
+        <p class="app-text"><i class="fas fa-phone"></i> +7 (812) 114-39-61</p>
+        <p class="app-text"><i class="fas fa-envelope"></i> tech-support@beyond-limits.ru</p>
+        <p class="app-text"><i class="fas fa-map-marker-alt"></i> 191028, Санкт-Петербург, Политехническая улица, 6</p>
+    </section>
+
+    <section>
+        <h1 class="app-title">
+            Часы работы
+        </h1>
+        <p class="app-text"><i class="fas fa-clock"></i> Ежедневно: 9.00 – 20.00</p>
+    </section>
+
+    <section>
+        <h1 class="app-title">
+            Наши соцсети
+        </h1>
+        <a href="https://t.me/beyond_limits_art_gallery" target="_blank" class="app-text">
+            <i class="fab fa-telegram"></i>
+            Telegram
+        </a>
+    </section>
 </div>
 {{end}}

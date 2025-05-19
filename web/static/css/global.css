@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #fff;
+}
+
+:root {
+    --content-width: 1440px;
+    --title-font: "Montserrat", sans-serif;
+    --text-font: "Roboto", sans-serif;
+    --brand-color: #4C2222;
+}
+
+.app-title {
+    font-family: var(--title-font);
+    font-size: 28px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.app-text {
+    font-family: var(--text-font);
+    font-weight: 100;
+    font-size: 24px;
+    line-height: 24px;
+    font-style: normal;
+    text-align: left;
+    color: #000!important;
+    text-decoration: none!important;
+}
+
+.app-button-link {
+    display: inline-block;
+    padding: 20px 80px;
+    border-radius: 30px;
+    background-color: var(--brand-color);
+    color: #fff;
+    text-decoration: none;
+    font-family: var(--title-font);
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background-color 0.3s ease;
+}
+
+.app-button-link:hover {
+    background-color: #333;
+}
+
+.app-button-link:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.5);
+}

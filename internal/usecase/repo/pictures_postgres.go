@@ -65,8 +65,6 @@ func (r *PicturesRepo) GetPictures(ctx context.Context) ([]entity.Picture, error
 		pictures = append(pictures, pic)
 	}
 
-	fmt.Println("HERE", pictures)
-
 	return pictures, nil
 }
 
